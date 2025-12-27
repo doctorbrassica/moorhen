@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moorhen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <!-- Background layers -->
+    <div class="bg-gradient"></div>
+    <div class="water-layer"></div>
+    <div class="reeds-layer reeds-back"></div>
+    <div class="reeds-layer reeds-mid"></div>
+    <div class="reeds-layer reeds-front"></div>
+    <div class="wood-texture"></div>
+    <div class="water-ripples"></div>
+    
+    <!-- Start overlay -->
+    <div id="start-overlay" class="overlay">
+        <div class="overlay-content">
+            <div class="moorhen-icon">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Moorhen body - black -->
+                    <ellipse cx="45" cy="50" rx="28" ry="18" fill="#1a1a1a"/>
+                    <!-- Head -->
+                    <circle cx="70" cy="38" r="12" fill="#1a1a1a"/>
+                    <!-- Wing detail -->
+                    <path d="M25 45c8 2 18 0 25-5" stroke="#2a2a2a" stroke-width="2" fill="none"/>
+                    <!-- White flank stripe -->
+                    <path d="M20 52c10 1 20 0 28-2" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Red frontal shield -->
+                    <ellipse cx="78" cy="32" rx="4" ry="6" fill="#cc2222"/>
+                    <!-- Beak - red with yellow tip -->
+                    <path d="M80 38l10 2c2 0 3-1 3-3l-8-4c-2-1-4 0-5 2z" fill="#cc2222"/>
+                    <path d="M88 37l5 1c1 0 2-1 2-2l-4-2" fill="#f0c75e"/>
+                    <!-- Eye -->
+                    <circle cx="72" cy="36" r="2.5" fill="#cc2222"/>
+                    <circle cx="72" cy="36" r="1" fill="#1a1a1a"/>
+                    <!-- Tail -->
+                    <path d="M17 48l-5 8M17 50l-7 5M17 52l-6 2" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+                    <!-- Legs - greenish yellow -->
+                    <path d="M38 65l-3 15M35 80l-5 3M35 80l5 2M52 63l2 17M54 80l-5 3M54 80l5 2" stroke="#9aab3a" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Water ripples -->
+                    <ellipse cx="45" cy="88" rx="25" ry="4" stroke="#4a90a4" stroke-width="1" opacity="0.4"/>
+                    <ellipse cx="45" cy="94" rx="35" ry="5" stroke="#4a90a4" stroke-width="1" opacity="0.25"/>
+                </svg>
+            </div>
+            <h1>Moorhen</h1>
+            <button id="start-btn" class="sacred-btn">
+                <span>Begin</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M10 8l6 4-6 4V8z" fill="currentColor"/>
+                </svg>
+            </button>
+            <p class="hint">Click to activate audio</p>
+        </div>
+    </div>
+
+    <!-- Main interface -->
+    <div id="main-interface" class="hidden">
+        <header>
+            <h1>Moorhen</h1>
+            <div class="header-controls">
+                <div class="volume-control">
+                    <label>Volume</label>
+                    <input type="range" id="master-volume" min="0" max="1" step="0.01" value="0.7">
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- XY Expression Pad -->
+            <section class="xy-pad-section">
+                <h2>Expression Pad</h2>
+                <p class="section-hint">Move finger or mouse to shape the sound</p>
+                <div id="xy-pad" class="xy-pad">
+                    <div class="xy-pad-grid"></div>
+                    <div id="xy-cursor" class="xy-cursor"></div>
+                    <div class="xy-label xy-label-left">Warmth</div>
+                    <div class="xy-label xy-label-right">Brightness</div>
+                    <div class="xy-label xy-label-top">Space</div>
+                    <div class="xy-label xy-label-bottom">Intimate</div>
+                    <div class="xy-center-mandala"></div>
+                </div>
+                <div class="expression-values">
+                    <span id="filter-value">Filter: 2000 Hz</span>
+                    <span id="reverb-value">Space: 50%</span>
+                </div>
+            </section>
+
+            <!-- Instruments Section -->
+            <section class="instruments-section">
+                <h2>Instruments</h2>
+                <p class="section-hint">Click to play or use the sequencer below</p>
+                
+                <!-- Singing Bowls -->
+                <div class="instrument-group">
+                    <h3><span class="instrument-icon">🔔</span> Singing Bowls</h3>
+                    <div class="bowls-container">
+                        <div class="bowl" data-note="0" data-freq="130.81">
+                            <div class="bowl-inner"></div>
+                            <div class="bowl-glow"></div>
+                            <span class="bowl-label">C</span>
+                        </div>
+                        <div class="bowl" data-note="1" data-freq="155.56">
+                            <div class="bowl-inner"></div>
+                            <div class="bowl-glow"></div>
+                            <span class="bowl-label">D♯</span>
+                        </div>
+                        <div class="bowl" data-note="2" data-freq="174.61">
+                            <div class="bowl-inner"></div>
+                            <div class="bowl-glow"></div>
+                            <span class="bowl-label">F</span>
+                        </div>
+                        <div class="bowl" data-note="3" data-freq="196.00">
+                            <div class="bowl-inner"></div>
+                            <div class="bowl-glow"></div>
+                            <span class="bowl-label">G</span>
+                        </div>
+                        <div class="bowl" data-note="4" data-freq="233.08">
+                            <div class="bowl-inner"></div>
+                            <div class="bowl-glow"></div>
+                            <span class="bowl-label">A♯</span>
+                        </div>
+                        <div class="bowl" data-note="5" data-freq="261.63">
+                            <div class="bowl-inner"></div>
+                            <div class="bowl-glow"></div>
+                            <span class="bowl-label">C</span>
+                        </div>
+                        <div class="bowl" data-note="6" data-freq="311.13">
+                            <div class="bowl-inner"></div>
+                            <div class="bowl-glow"></div>
+                            <span class="bowl-label">D♯</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wind Instrument (Bansuri) -->
+                <div class="instrument-group">
+                    <h3><span class="instrument-icon">🎐</span> Bansuri (Flute)</h3>
+                    <div class="wind-container">
+                        <div class="wind-note" data-note="0" data-freq="130.81"><span>C</span></div>
+                        <div class="wind-note" data-note="1" data-freq="155.56"><span>D♯</span></div>
+                        <div class="wind-note" data-note="2" data-freq="174.61"><span>F</span></div>
+                        <div class="wind-note" data-note="3" data-freq="196.00"><span>G</span></div>
+                        <div class="wind-note" data-note="4" data-freq="233.08"><span>A♯</span></div>
+                        <div class="wind-note" data-note="5" data-freq="261.63"><span>C</span></div>
+                        <div class="wind-note" data-note="6" data-freq="311.13"><span>D♯</span></div>
+                    </div>
+                </div>
+                
+                <!-- String Instrument (Sitar) -->
+                <div class="instrument-group">
+                    <h3><span class="instrument-icon">🎸</span> Sitar (Strings)</h3>
+                    <div class="strings-container">
+                        <div class="string-note" data-note="0" data-freq="130.81"><span>C</span></div>
+                        <div class="string-note" data-note="1" data-freq="155.56"><span>D♯</span></div>
+                        <div class="string-note" data-note="2" data-freq="174.61"><span>F</span></div>
+                        <div class="string-note" data-note="3" data-freq="196.00"><span>G</span></div>
+                        <div class="string-note" data-note="4" data-freq="233.08"><span>A♯</span></div>
+                        <div class="string-note" data-note="5" data-freq="261.63"><span>C</span></div>
+                        <div class="string-note" data-note="6" data-freq="311.13"><span>D♯</span></div>
+                    </div>
+                </div>
+                
+                <!-- Tibetan Long Horn (Dungchen) -->
+                <div class="instrument-group">
+                    <h3><span class="instrument-icon">📯</span> Dungchen (Long Horn)</h3>
+                    <div class="horn-container">
+                        <div class="horn-note" data-note="0" data-freq="130.81"><span>C</span></div>
+                        <div class="horn-note" data-note="1" data-freq="155.56"><span>D♯</span></div>
+                        <div class="horn-note" data-note="2" data-freq="174.61"><span>F</span></div>
+                        <div class="horn-note" data-note="3" data-freq="196.00"><span>G</span></div>
+                        <div class="horn-note" data-note="4" data-freq="233.08"><span>A♯</span></div>
+                        <div class="horn-note" data-note="5" data-freq="261.63"><span>C</span></div>
+                        <div class="horn-note" data-note="6" data-freq="311.13"><span>D♯</span></div>
+                    </div>
+                </div>
+                
+                <!-- Moorhen Call -->
+                <div class="instrument-group">
+                    <h3><span class="instrument-icon">🐦</span> Moorhen Call</h3>
+                    <div class="bird-container">
+                        <div class="moorhen-note" data-note="0" data-freq="130.81"><span>C</span></div>
+                        <div class="moorhen-note" data-note="1" data-freq="155.56"><span>D♯</span></div>
+                        <div class="moorhen-note" data-note="2" data-freq="174.61"><span>F</span></div>
+                        <div class="moorhen-note" data-note="3" data-freq="196.00"><span>G</span></div>
+                        <div class="moorhen-note" data-note="4" data-freq="233.08"><span>A♯</span></div>
+                        <div class="moorhen-note" data-note="5" data-freq="261.63"><span>C</span></div>
+                        <div class="moorhen-note" data-note="6" data-freq="311.13"><span>D♯</span></div>
+                    </div>
+                </div>
+                
+                <!-- Oystercatcher Call -->
+                <div class="instrument-group">
+                    <h3><span class="instrument-icon">🦅</span> Oystercatcher</h3>
+                    <div class="bird-container">
+                        <div class="oystercatcher-note" data-note="0" data-freq="130.81"><span>C</span></div>
+                        <div class="oystercatcher-note" data-note="1" data-freq="155.56"><span>D♯</span></div>
+                        <div class="oystercatcher-note" data-note="2" data-freq="174.61"><span>F</span></div>
+                        <div class="oystercatcher-note" data-note="3" data-freq="196.00"><span>G</span></div>
+                        <div class="oystercatcher-note" data-note="4" data-freq="233.08"><span>A♯</span></div>
+                        <div class="oystercatcher-note" data-note="5" data-freq="261.63"><span>C</span></div>
+                        <div class="oystercatcher-note" data-note="6" data-freq="311.13"><span>D♯</span></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sequencer Section -->
+            <section class="sequencer-section">
+                <h2>Step Sequencer</h2>
+                <p class="section-hint">Click steps to toggle, select notes with dropdowns</p>
+                
+                <div class="sequencer-controls">
+                    <button id="seq-play-btn" class="seq-play-btn">
+                        <span class="play-icon">▶</span>
+                        <span class="stop-icon">■</span>
+                    </button>
+                    <div class="seq-slider-group">
+                        <label>Tempo</label>
+                        <input type="range" id="seq-tempo" min="40" max="200" step="1" value="120">
+                        <span id="seq-tempo-value" class="slider-value">120 BPM</span>
+                    </div>
+                    <div class="seq-slider-group">
+                        <label>Randomness</label>
+                        <input type="range" id="seq-randomness" min="0" max="1" step="0.01" value="0">
+                        <span id="seq-randomness-value" class="slider-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sequencer-grid">
+                    <!-- Bowls Sequencer -->
+                    <div class="seq-row" data-instrument="bowls">
+                        <div class="seq-label-group">
+                            <span class="seq-label">🔔 Bowls</span>
+                            <div class="inst-volume">
+                                <input type="range" class="inst-volume-slider" data-instrument="bowls" min="0" max="1" step="0.01" value="0.7">
+                            </div>
+                        </div>
+                        <div class="seq-steps">
+                            <div class="seq-step" data-step="0"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="1"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="2"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="3"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="4"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="5"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="6"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="7"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="8"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="9"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="10"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="11"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="12"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="13"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="14"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="15"><select class="note-select"></select></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Wind Sequencer -->
+                    <div class="seq-row" data-instrument="wind">
+                        <div class="seq-label-group">
+                            <span class="seq-label">🎐 Flute</span>
+                            <div class="inst-volume">
+                                <input type="range" class="inst-volume-slider" data-instrument="wind" min="0" max="1" step="0.01" value="0.6">
+                            </div>
+                        </div>
+                        <div class="seq-steps">
+                            <div class="seq-step" data-step="0"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="1"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="2"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="3"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="4"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="5"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="6"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="7"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="8"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="9"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="10"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="11"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="12"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="13"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="14"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="15"><select class="note-select"></select></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Strings Sequencer -->
+                    <div class="seq-row" data-instrument="strings">
+                        <div class="seq-label-group">
+                            <span class="seq-label">🎸 Sitar</span>
+                            <div class="inst-volume">
+                                <input type="range" class="inst-volume-slider" data-instrument="strings" min="0" max="1" step="0.01" value="0.7">
+                            </div>
+                        </div>
+                        <div class="seq-steps">
+                            <div class="seq-step" data-step="0"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="1"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="2"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="3"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="4"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="5"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="6"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="7"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="8"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="9"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="10"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="11"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="12"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="13"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="14"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="15"><select class="note-select"></select></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Horn Sequencer -->
+                    <div class="seq-row" data-instrument="horn">
+                        <div class="seq-label-group">
+                            <span class="seq-label">📯 Horn</span>
+                            <div class="inst-volume">
+                                <input type="range" class="inst-volume-slider" data-instrument="horn" min="0" max="1" step="0.01" value="0.6">
+                            </div>
+                        </div>
+                        <div class="seq-steps">
+                            <div class="seq-step" data-step="0"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="1"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="2"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="3"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="4"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="5"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="6"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="7"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="8"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="9"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="10"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="11"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="12"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="13"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="14"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="15"><select class="note-select"></select></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Moorhen Sequencer -->
+                    <div class="seq-row" data-instrument="moorhen">
+                        <div class="seq-label-group">
+                            <span class="seq-label">🐦 Moorhen</span>
+                            <div class="inst-volume">
+                                <input type="range" class="inst-volume-slider" data-instrument="moorhen" min="0" max="1" step="0.01" value="0.5">
+                            </div>
+                        </div>
+                        <div class="seq-steps">
+                            <div class="seq-step" data-step="0"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="1"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="2"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="3"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="4"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="5"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="6"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="7"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="8"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="9"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="10"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="11"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="12"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="13"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="14"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="15"><select class="note-select"></select></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Oystercatcher Sequencer -->
+                    <div class="seq-row" data-instrument="oystercatcher">
+                        <div class="seq-label-group">
+                            <span class="seq-label">🦅 Oyster</span>
+                            <div class="inst-volume">
+                                <input type="range" class="inst-volume-slider" data-instrument="oystercatcher" min="0" max="1" step="0.01" value="0.4">
+                            </div>
+                        </div>
+                        <div class="seq-steps">
+                            <div class="seq-step" data-step="0"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="1"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="2"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="3"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="4"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="5"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="6"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="7"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="8"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="9"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="10"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="11"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="12"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="13"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="14"><select class="note-select"></select></div>
+                            <div class="seq-step" data-step="15"><select class="note-select"></select></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step indicators -->
+                    <div class="seq-row seq-indicators">
+                        <span class="seq-label"></span>
+                        <div class="seq-steps">
+                            <div class="step-indicator" data-step="0">1</div>
+                            <div class="step-indicator" data-step="1">2</div>
+                            <div class="step-indicator" data-step="2">3</div>
+                            <div class="step-indicator" data-step="3">4</div>
+                            <div class="step-indicator" data-step="4">5</div>
+                            <div class="step-indicator" data-step="5">6</div>
+                            <div class="step-indicator" data-step="6">7</div>
+                            <div class="step-indicator" data-step="7">8</div>
+                            <div class="step-indicator" data-step="8">9</div>
+                            <div class="step-indicator" data-step="9">10</div>
+                            <div class="step-indicator" data-step="10">11</div>
+                            <div class="step-indicator" data-step="11">12</div>
+                            <div class="step-indicator" data-step="12">13</div>
+                            <div class="step-indicator" data-step="13">14</div>
+                            <div class="step-indicator" data-step="14">15</div>
+                            <div class="step-indicator" data-step="15">16</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Drone Control -->
+            <section class="drone-section">
+                <h2>Drone & Atmosphere</h2>
+                <p class="section-hint">Press SPACE or click to activate the continuous tone</p>
+                <div class="drone-controls">
+                    <button id="drone-btn" class="drone-btn">
+                        <div class="drone-rings">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                        </div>
+                        <span class="drone-text">◉</span>
+                    </button>
+                    <div class="drone-sliders">
+                        <div class="drone-slider-group">
+                            <label>Base Tone</label>
+                            <input type="range" id="drone-base" min="-12" max="12" step="1" value="0">
+                            <span id="drone-base-value" class="slider-value">C2</span>
+                        </div>
+                        <div class="drone-slider-group">
+                            <label>Intensity</label>
+                            <input type="range" id="drone-volume" min="0" max="0.6" step="0.01" value="0.3">
+                        </div>
+                        <div class="drone-slider-group">
+                            <label>🌬️ Wind</label>
+                            <input type="range" id="wind-volume" min="0" max="1" step="0.01" value="0">
+                            <span id="wind-value" class="slider-value">0%</span>
+                        </div>
+                        <div class="drone-slider-group">
+                            <label>💧 Water</label>
+                            <input type="range" id="water-volume" min="0" max="1" step="0.01" value="0">
+                            <span id="water-value" class="slider-value">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pitch Bend Wheel -->
+            <section class="pitch-section">
+                <h2>Pitch Bend</h2>
+                <p class="section-hint">Drag up/down for expressive bends</p>
+                <div id="pitch-wheel" class="pitch-wheel">
+                    <div class="pitch-track">
+                        <div id="pitch-handle" class="pitch-handle"></div>
+                    </div>
+                    <div class="pitch-center-line"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Keyboard Guide -->
+        <footer>
+            <div class="keyboard-guide">
+                <span class="guide-title">Keyboard:</span>
+                <div class="key-hints">
+                    <span><kbd>A</kbd>-<kbd>L</kbd> Play notes</span>
+                    <span><kbd>W</kbd><kbd>E</kbd><kbd>T</kbd><kbd>Y</kbd><kbd>I</kbd><kbd>O</kbd> Black keys</span>
+                    <span><kbd>SPACE</kbd> Toggle drone</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Visualization canvas -->
+    <canvas id="viz-canvas"></canvas>
+
+    <script src="static/js/synth.js"></script>
+    <script src="static/js/ui.js"></script>
+</body>
+</html>
+
