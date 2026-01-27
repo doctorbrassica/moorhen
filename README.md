@@ -10,4 +10,5 @@ Atmospheric soundscape
 - Longchen
 - Moorhen call
 - Oyster catcher call
-Instruments are tuned to opentatonic scale
+- Wooden stick
+Instruments are tuned to pentatonic scale
