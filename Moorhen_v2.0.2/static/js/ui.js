@@ -326,14 +326,13 @@ function setupSequencer() {
         randomnessValue.textContent = `${Math.round(sequencer.randomness * 100)}%`;
     });
     
-    // Step clicks - left click toggles on/off, right click opens note selection
+    // Step clicks - toggle on/off and note selection
     document.querySelectorAll('.seq-step').forEach(step => {
         const select = step.querySelector('.note-select');
         if (!select) return; // Skip indicator row
         
-        // Left click - toggle step on/off
         step.addEventListener('click', (e) => {
-            e.preventDefault();
+            if (e.target === select) return;
             
             const row = step.closest('.seq-row');
             const instrument = row.dataset.instrument;
@@ -350,28 +349,6 @@ function setupSequencer() {
                 sequencer.patterns[instrument][stepIndex] = noteValue;
                 select.value = noteValue;
             }
-        });
-        
-        // Right click - open note selection
-        step.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            
-            // Show the select dropdown
-            select.classList.add('show');
-            select.focus();
-            
-            // Programmatically open the dropdown
-            const event = new MouseEvent('mousedown', { bubbles: true });
-            select.dispatchEvent(event);
-            
-            // Hide again after selection or blur
-            const hideSelect = () => {
-                select.classList.remove('show');
-                select.removeEventListener('blur', hideSelect);
-                select.removeEventListener('change', hideSelect);
-            };
-            select.addEventListener('blur', hideSelect);
-            select.addEventListener('change', hideSelect);
         });
         
         // Note selection change
