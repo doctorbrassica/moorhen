@@ -1,18 +1,17 @@
 # moorhen
-Moorhen audio synthesiser
+Moorhen-themed audio synthesiser
 
-Drone synth with expressive controls
+Mostly vibe coded with Cursor/Opus 4.5
 
-Atmospheric soundscape
-
-16 step synchronised sequenced instruments
-
-- Singing bowls
-- Flute
-- Sitar
-- Longchen
-- Moorhen call
-- Oyster catcher call
-- Wooden stick
-
-Instruments are tuned to pentatonic scale
+- Drone synth with expressive controls
+- Atmospheric soundscape
+- 16 step synchronised sequenced instruments
+  - Singing bowls
+  - Flute
+  - Sitar
+  - Longchen
+  - Moorhen call
+  - Oyster catcher call
+  - Wooden stick
+- Instruments are tuned to pentatonic scale
+- MIDI input
