@@ -15,3 +15,5 @@ Mostly vibe coded with Cursor/Opus 4.5
   - Wooden stick
 - Instruments are tuned to pentatonic scale
 - MIDI input
+
+Shared at https://doctorbrassica.github.io/
